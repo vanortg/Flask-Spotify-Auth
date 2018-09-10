@@ -1,5 +1,5 @@
-from flask import requests
-import base64, json
+from flask import redirect, jsonify
+import base64, json, requests
 
 SPOTIFY_URL_AUTH = 'https://accounts.spotify.com/authorize/?'
 SPOTIFY_URL_TOKEN = 'https://accounts.spotify.com/api/token/'
@@ -7,20 +7,23 @@ RESPONSE_TYPE = 'code'
 HEADER = ''
 REFRESH_TOKEN = ''
     
-def getAuth(client_id, client_secret, redirect_uri, scope):
-    data = requests.get('{}client_id={}&response_type={}&redirect_uri={}&scope={}'.format(SPOTIFY_URL_AUTH, client_id, response_type, redirect_uri, scope))
-  
+def getAuth(client_id, redirect_uri, scope):
+    data = "{}client_id={}&response_type=code&redirect_uri={}&scope={}".format(SPOTIFY_URL_AUTH, client_id, redirect_uri, scope) 
+    return data
+
+def getToken(code, client_id, client_secret):
     body = {
         "grant_type": "authorization_code",
-        "code" : str(data.code),
-        "redirect_uri": redirect_uri
+        "code" : code,
+        "redirect_uri": redirect_uri,
+        "client_id": client_id,
+        "client_secret": client_secret
     }
-    
-    HEADER = {"Authorization" : "Basic {}".format(base64.b64encode("{}:{}".format(client_id, client_secret)))} 
+        
+      
 
-    post = requests.post(SPOTIFY_URL_TOKEN, data=body, headers=HEADER)
-
-    response = json.loads(post.text)
+    post = requests.post(SPOTIFY_URL_TOKEN, data=body)
+     
 
     auth_head = {"Authorization": "Bearer {}".format(response["access_token"])}
     REFRESH_TOKEN = response["refresh_token"]
