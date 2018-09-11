@@ -19,7 +19,7 @@ def getUser():
     return getAuth(CLIENT_ID, "{}:{}/callback/".format(CALLBACK_URL, PORT), SCOPE)
 
 def getUserToken(code):
-    tokenData = getToken(code, CLIENT_ID, CLIENT_SECRET)
+    tokenData = getToken(code, CLIENT_ID, CLIENT_SECRET, "{}:{}/post/".format(CALLBACK_URL, POST))
  
 def refreshToken(time):
     time.sleep(time)
