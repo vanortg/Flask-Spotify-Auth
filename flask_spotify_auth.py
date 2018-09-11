@@ -1,10 +1,10 @@
 from flask import redirect, jsonify
-import base64, json, requests
+import json, requests
 
 SPOTIFY_URL_AUTH = 'https://accounts.spotify.com/authorize/?'
 SPOTIFY_URL_TOKEN = 'https://accounts.spotify.com/api/token/'
 RESPONSE_TYPE = 'code'   
-HEADER = ''
+HEADER = 'application/x-www-form-urlencoded'
 REFRESH_TOKEN = ''
     
 def getAuth(client_id, redirect_uri, scope):
