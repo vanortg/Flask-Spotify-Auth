@@ -11,7 +11,7 @@ def getAuth(client_id, redirect_uri, scope):
     data = "{}client_id={}&response_type=code&redirect_uri={}&scope={}".format(SPOTIFY_URL_AUTH, client_id, redirect_uri, scope) 
     return data
 
-def getToken(code, client_id, client_secret):
+def getToken(code, client_id, client_secret, redirect_uri):
     body = {
         "grant_type": "authorization_code",
         "code" : code,
