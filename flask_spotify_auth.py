@@ -23,8 +23,8 @@ def getToken(code, client_id, client_secret):
       
 
     post = requests.post(SPOTIFY_URL_TOKEN, data=body)
-     
 
+def handleToken(resposnse):
     auth_head = {"Authorization": "Bearer {}".format(response["access_token"])}
     REFRESH_TOKEN = response["refresh_token"]
     return [auth_head, response["scope"], response["expires_in"]]
@@ -36,8 +36,3 @@ def refreshAuth():
     }
 
     post_refresh = requests.post(SPOTIFY_URL_TOKEN, data=body, headers=HEADER)
-    post_response = json.loads(post_refresh.text)
-    
-    auth_head = {"Authorization": "Bearer {}".format(post_response["access_token"])}
-    return [auth_head, post_response["scope"], response["expires_in"]]
-
