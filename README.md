@@ -1,4 +1,4 @@
-# Flask Spotify Auth 
+# Flask-Spotify-Auth 
 
 This repo is for spotify user authentication within a flask app. This flask extension handles user login, scope authentication, access tokens, and refresh cycles for any Spotify registered flask app. Spotify Web API's that have a javascript authentication (i.e. Web Player) can access token information through Jinja3 route calls linking to the getAccessToken method.
 
@@ -52,3 +52,41 @@ The access token, returned in an array with the required authentication header, 
 
     [ACCESS_TOKEN, AUTHENTICATION_HEADER, AUTHORIZED_SCOPES, EXPIRATION]
 
+## Renewal of Access Token and Expiration
+
+Access token renewal is handled automatically by the Flask-Spotify-Auth extension and will update the array returned by getAccessToken() after each expiration period. Renewal can be forced through calls to forceRenewal().
+
+The expiration (in seconds) can be found in the returned array when call getAccessToken(). If error occurs and the access token has not been updated, manually call forceRenewal() and refer to Common Issues for possible solution. Please note that forceRenewal will not return any value, instead a subsequent call must be made to getAccessToken().
+
+## Version Updates
+
+### V0.2
+
+#### Automated Renewal
+
+New to flask-spotify-auth, v0.2 adds automated access token renewal. Clients no longer need to call getAccessToken() after the returned expiration time period. The expiration (in seconds) has been left in the returned array from getAccessToken(), however, calls to the method are unnecessary after the expiration. The field has been left as a returned value for use if error occurs and the access token is not updated. 
+
+#### Routing Changes 
+
+The requirement of a posting callback route has been removed and transitioned to a requirement of one callback route. The callback route can be specified be the client but must be changed within startup.py and must be a listed callback within the Spotify Developers App Dashboard.
+
+#### Jinja Optimization
+
+Flask-Spotify-Auth has been optimized for returning information to jinja calls within JavaScript, or Html files.
+
+## Notes About App Design
+
+If building an app with a Spotify login as the initial startup page, redirecting to the main hompage is best done after sending the returned 'code' to getUserToken(). The Spotify login screen is the only user interaction that this extension requires. 
+
+## Requirements
+
+Requirements for Flask-Spotify-Auth are generally preinstalled in both Flask and Python3, however, for custom installs the following packages are required:
+
+        - Flask:
+            -- redirect
+            -- requests
+        
+        - Python3:
+            -- json
+            -- base64
+            -- request
