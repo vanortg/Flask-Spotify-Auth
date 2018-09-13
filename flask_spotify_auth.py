@@ -1,4 +1,3 @@
-from flask import redirect, jsonify
 import base64, json, requests
 
 SPOTIFY_URL_AUTH = 'https://accounts.spotify.com/authorize/?'
