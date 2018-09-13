@@ -1,6 +1,6 @@
 # Flask-Spotify-Auth 
 
-This repo is for spotify user authentication within a flask app. This flask extension handles user login, scope authentication, access tokens, and refresh cycles for any Spotify registered flask app. Spotify Web API's that have a javascript authentication (i.e. Web Player) can access token information through Jinja3 route calls linking to the getAccessToken method.
+This extension is for spotify user authentication within a flask app. This flask extension handles user login, scope authentication, access tokens, and refresh cycles for any Spotify registered flask app. Spotify Web API's that have a javascript authentication (i.e. Web Player) can access token information through Jinja3 route calls linking to the getAccessToken method.
 
 ## Initial Setup
 
