@@ -28,6 +28,6 @@ setup(
         'Intended Audience :: Developers',
         'Operating System :: OS Independent',
         'License :: OSI Approved :: BSD License',
-        'Programming Language :: Python',
+        'Programming Language :: Python3',
     ]
 )
